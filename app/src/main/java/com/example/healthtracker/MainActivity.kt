@@ -13,6 +13,7 @@
     import com.example.healthtracker.Viewmodel.SignupViewModelFactory
     import com.example.healthtracker.ui.theme.HealthTrackerTheme
 
+
     // Navigation Destinations
     sealed class Destination
     object DestinationLogin : Destination()
@@ -59,7 +60,8 @@
                             )
 
                         is DestinationHabit ->
-                            HabitScreen()
+                            HabitScreen(userEmail = loginViewModel.loggedInUserEmail.value!!)
+
                     }
                 }
             }
