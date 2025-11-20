@@ -10,6 +10,7 @@ import com.example.healthtracker.models.Habit
 import com.example.healthtracker.Dao.HabitDao
 import android.content.Context
 import androidx.room.Room
+import androidx.room.TypeConverters
 
 @Database(entities = [UserEntity::class, Habit::class], version = 2, exportSchema = false) // <--- version++
 abstract class AppDatabase : RoomDatabase() {

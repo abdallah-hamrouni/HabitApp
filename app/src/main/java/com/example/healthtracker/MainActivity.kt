@@ -14,11 +14,11 @@
     import com.example.healthtracker.ui.theme.HealthTrackerTheme
 
 
-    // Navigation Destinations
     sealed class Destination
     object DestinationLogin : Destination()
     object DestinationSignup : Destination()
-    object DestinationHabit : Destination() // nouvel écran
+    object DestinationHabit : Destination()
+
 
     class MainActivity : ComponentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,11 +27,9 @@
             setContent {
                 HealthTrackerTheme {
 
-                    // ✅ Initialisation Room + Repository
                     val database = AppDatabase.getDatabase(this)
                     val repository = UserRepository(database.userDao())
 
-                    // ✅ Initialisation ViewModels
                     val signupViewModel: SignupViewModel = viewModel(factory = SignupViewModelFactory(
                         repository
                     )
@@ -41,7 +39,6 @@
                     )
                     )
 
-                    // ✅ Navigation state
                     val backStack = remember { mutableStateListOf<Destination>(DestinationLogin) }
 
                     when (backStack.last()) {
@@ -59,8 +56,17 @@
                                 onNavigateToSignin = { backStack.removeLastOrNull() }
                             )
 
-                        is DestinationHabit ->
-                            HabitScreen(userEmail = loginViewModel.loggedInUserEmail.value!!)
+                        is DestinationHabit -> HabitScreen(
+                            userEmail = loginViewModel.loggedInUserEmail.value!!,
+                            onSignOut = {
+                                // Réinitialiser le backStack pour revenir à l'écran login
+                                backStack.clear()
+                                backStack.add(DestinationLogin)
+                                // Optionnel : réinitialiser l'email loggé
+                                loginViewModel.loggedInUserEmail.value = null
+                            }
+                        )
+
 
                     }
                 }

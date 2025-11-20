@@ -22,7 +22,7 @@ import com.example.healthtracker.Viewmodel.LoginViewModel
 fun LoginScreen(
     viewModel: LoginViewModel,
     onNavigateToSignup: () -> Unit,
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: (String) -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -102,7 +102,7 @@ fun LoginScreen(
                         viewModel.login(email, password) { success: Boolean, msg: String ->
                             loading = false
                             message = msg
-                            if (success) onLoginSuccess()
+                            if (success) onLoginSuccess(email)
                         }
                     },
                     modifier = Modifier

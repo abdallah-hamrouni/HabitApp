@@ -14,11 +14,14 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
         viewModelScope.launch {
             val user = repository.getUser(email, password)
             if (user != null) {
-                loggedInUserEmail.value = user.email  // ✅ On stocke l’email du user connecté
+                loggedInUserEmail.value = user.email
                 onResult(true, "Connexion réussie ✅")
             } else {
                 onResult(false, "Email ou mot de passe incorrect ❌")
             }
         }
+    }
+    fun signOut() {
+        loggedInUserEmail.value = null
     }
 }
