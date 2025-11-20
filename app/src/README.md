@@ -1,6 +1,6 @@
-HealthTracker – Application Android en Jetpack Compose
+HabitApp – Application Android en Jetpack Compose
 
-HealthTracker est une application Android développée avec Jetpack Compose, permettant de gérer vos habitudes quotidiennes, consulter vos statistiques, votre profil, ainsi que la météo actuelle.
+HabitApp est une application Android développée avec Jetpack Compose, permettant de gérer vos habitudes quotidiennes, consulter vos statistiques, votre profil, ainsi que la météo actuelle.
 
  1. Authentification (Signup & Login)
 
